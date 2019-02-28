@@ -1,0 +1,39 @@
+- name: Copy OpenDKIM Root Config Files
+  register: opendkim_root_configs
+  become: yes
+  copy:
+    src: "{{ item }}"
+    dest: /etc/
+    mode: 0640
+    owner: opendkim
+  with_fileglob:
+    - ../files/opendkim/etc/*
+
+- name: Copy OpenDKIM Internal Config Files
+  register: opendkim_internal_configs
+  become: yes
+  copy:
+    src: "{{ item }}"
+    dest: /etc/opendkim/
+    mode: 0640
+    owner: opendkim
+  with_fileglob:
+    - ../files/opendkim/etc/opendkim/*
+
+- name: Copy OpenDKIM /etc/default Config Files
+  register: opendkim_etc_default_configs
+  become: yes
+  copy:
+    src: "{{ item }}"
+    dest: /etc/default/
+    mode: 0644
+    owner: root
+  with_fileglob:
+    - ../files/opendkim/etc/default/*
+
+- name: Restart OpenDKIM
+  when: opendkim_root_configs.changed or opendkim_internal_configs.changed or opendkim_etc_default_configs.changed
+  become: yes
+  service:
+    name: opendkim
+    state: restarted

@@ -1,0 +1,14 @@
+- hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Installs all required software
+      become: yes
+      apt:
+        pkg: [
+          'socat',
+          'postfix',
+          'mailutils',
+          'opendkim',
+          'opendkim-tools'
+        ]

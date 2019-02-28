@@ -1,0 +1,17 @@
+- name: Copy Postfix Config Files
+  register: postfix_configs
+  become: yes
+  copy:
+    src: "{{ item }}"
+    dest: /etc/postfix/
+    mode: 0755
+    owner: root
+  with_fileglob:
+    - ../files/postfix/etc/postfix/*
+
+- name: Restart Postfix
+  when: postfix_configs.changed
+  become: yes
+  service:
+    name: postfix
+    state: restarted
