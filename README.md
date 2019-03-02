@@ -3,7 +3,7 @@
 ## Software
 
 ```
-ansible-playbook playbooks/software.yml
+ansible-playbook playbooks/software.yml --extra-var "target=cryptoprocessing"
 ```
 
 ## Configs

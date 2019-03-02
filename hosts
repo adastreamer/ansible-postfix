@@ -1,2 +1,2 @@
-[etelaranta]
-web ansible_ssh_host=63.34.140.33 ansible_ssh_user=deployer
+[cryptoprocessing]
+web ansible_ssh_host=13.73.140.38 ansible_ssh_user=deployer
