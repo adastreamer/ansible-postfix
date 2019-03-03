@@ -1,23 +1,11 @@
 [cryptoprocessing]
 web ansible_ssh_host=13.73.140.38 ansible_ssh_user=deployer
 
-[cryptoprocessing:vars]
-key_name=cryptoprocessing
-domain=notifications.cryptoprocessing.io
-
-
 [pprotocol]
 web ansible_ssh_host=23.97.227.137 ansible_ssh_user=deployer
-
-[pprotocol:vars]
-key_name=pprotocol
-domain=notifications.pprotocol.io
-
 
 [worldwifi]
 web ansible_ssh_host=217.67.186.181 ansible_ssh_user=wwf
 
-[worldwifi:vars]
-key_name=worldwifi
-domain=notifications.worldwifi.io
-
+[viarium]
+web ansible_ssh_host=54.154.217.53 ansible_ssh_user=deployer

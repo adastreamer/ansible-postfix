@@ -3,14 +3,24 @@
 ## Software
 
 ```
-ansible-playbook playbooks/software.yml --extra-var "target=cryptoprocessing"
+ansible-playbook playbooks/software.yml \
+  --extra-var "target=cryptoprocessing" \
+  --extra-var "key_name=cryptoprocessing" \
+  --extra-var "domain=notifications.cryptoprocessing.io"
 ```
 
 ## Configs
 
 ```
-ansible-playbook playbooks/configs_postfix.yml --extra-var "target=cryptoprocessing"
-ansible-playbook playbooks/configs_opendkim.yml --extra-var "target=cryptoprocessing"
+ansible-playbook playbooks/configs_postfix.yml \
+  --extra-var "target=cryptoprocessing" \
+  --extra-var "key_name=cryptoprocessing" \
+  --extra-var "domain=notifications.cryptoprocessing.io"
+
+ansible-playbook playbooks/configs_opendkim.yml \
+  --extra-var "target=cryptoprocessing" \
+  --extra-var "key_name=cryptoprocessing" \
+  --extra-var "domain=notifications.cryptoprocessing.io"
 ```
 
 ## Additional notes
