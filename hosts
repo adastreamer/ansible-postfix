@@ -1,2 +1,6 @@
 [cryptoprocessing]
 web ansible_ssh_host=13.73.140.38 ansible_ssh_user=deployer
+
+[cryptoprocessing:vars]
+key_name=cryptoprocessing
+domain=notifications.cryptoprocessing.io

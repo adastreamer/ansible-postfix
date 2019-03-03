@@ -28,11 +28,13 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 # information on enabling SSL in the smtp client.
 
 smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
-myhostname = exchange.meram.company
+
+myhostname = {{ domain }}
+
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 myorigin = /etc/mailname
-mydestination = $myhostname, exchange.meram.company, localhost.chpqkfnkl1eetj3s4e0imipf0d.ax.internal.cloudapp.net, , localhost
+mydestination = $myhostname, localhost
 relayhost = 
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
 mailbox_size_limit = 0

@@ -1,4 +1,59 @@
-- hosts: all
+- hosts: '{{ target }}'
   gather_facts: no
   tasks:
-    - include: _tasks_configs_opendkim.yml
+    - name: Copy OpenDKIM Config File
+      register: opendkim_root_config
+      become: yes
+      template:
+        src: '../files/opendkim/etc/opendkim.conf.j2'
+        dest:                 '/etc/opendkim.conf'
+        mode: 0640
+        owner: opendkim
+
+
+    - name: Copy OpenDKIM key.table File
+      register: opendkim_key_table
+      become: yes
+      template:
+        src: '../files/opendkim/etc/opendkim/key.table.j2'
+        dest:                 '/etc/opendkim/key.table'
+        mode: 0640
+        owner: opendkim
+
+
+    - name: Copy OpenDKIM signing.table File
+      register: opendkim_signing_table
+      become: yes
+      template:
+        src: '../files/opendkim/etc/opendkim/signing.table.j2'
+        dest:                 '/etc/opendkim/signing.table'
+        mode: 0640
+        owner: opendkim
+
+
+    - name: Copy OpenDKIM trusted.hosts File
+      register: opendkim_trusted_hosts
+      become: yes
+      template:
+        src: '../files/opendkim/etc/opendkim/trusted.hosts.j2'
+        dest:                 '/etc/opendkim/trusted.hosts'
+        mode: 0640
+        owner: opendkim
+
+
+    - name: Copy OpenDKIM Default Config File
+      register: opendkim_default_config
+      become: yes
+      template:
+        src: '../files/opendkim/etc/default/opendkim.j2'
+        dest:                 '/etc/default/opendkim'
+        mode: 0640
+        owner: opendkim
+
+
+    - name: Restart OpenDKIM
+      when: opendkim_root_config.changed or opendkim_key_table.changed or opendkim_signing_table.changed or opendkim_trusted_hosts.changed or opendkim_default_config.changed
+      become: yes
+      service:
+        name: opendkim
+        state: restarted

@@ -11,12 +11,12 @@ ansible-playbook playbooks/software.yml --extra-var "target=cryptoprocessing"
 ### Run All Configs Setup
 
 ```
-ansible-playbook playbooks/configs.yml
+ansible-playbook playbooks/configs.yml --extra-var "target=cryptoprocessing"
 ```
 
 ### Available Tasks
 
 ```
-ansible-playbook playbooks/configs_postfix.yml
-ansible-playbook playbooks/configs_opendkim.yml
+ansible-playbook playbooks/configs_postfix.yml --extra-var "target=cryptoprocessing"
+ansible-playbook playbooks/configs_opendkim.yml --extra-var "target=cryptoprocessing"
 ```

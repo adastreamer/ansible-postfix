@@ -1,4 +1,19 @@
-- hosts: all
+- hosts: '{{ target }}'
   gather_facts: no
   tasks:
-    - include: _tasks_configs_postfix.yml
+    - name: Copy Postfix Config Files
+      register: postfix_configs
+      become: yes
+      template:
+        src: '../files/postfix/etc/postfix/main.cf.j2'
+        dest:                '/etc/postfix/main.cf'
+        mode: 0755
+        owner: root
+
+    - name: Restart Postfix
+      when: postfix_configs.changed
+      become: yes
+      service:
+        name: postfix
+        state: restarted
+
