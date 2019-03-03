@@ -3,7 +3,7 @@
 ## Software
 
 ```
-ansible-playbook playbooks/software.yml --extra-var "target=cryptoprocessing"
+ansible-playbook playbooks/software.yml
 ```
 
 ## Configs
@@ -11,14 +11,14 @@ ansible-playbook playbooks/software.yml --extra-var "target=cryptoprocessing"
 ### Run All Configs Setup
 
 ```
-ansible-playbook playbooks/configs.yml --extra-var "target=cryptoprocessing"
+ansible-playbook playbooks/configs.yml
 ```
 
 ### Available Tasks
 
 ```
-ansible-playbook playbooks/configs_postfix.yml --extra-var "target=cryptoprocessing"
-ansible-playbook playbooks/configs_opendkim.yml --extra-var "target=cryptoprocessing"
+ansible-playbook playbooks/configs_postfix.yml
+ansible-playbook playbooks/configs_opendkim.yml
 ```
 
 ## Additional notes
@@ -49,16 +49,18 @@ ansible-playbook playbooks/configs_opendkim.yml --extra-var "target=cryptoproces
 
   ```
   sudo mkdir -p /etc/opendkim/keys/
+  cd /etc/opendkim/keys/
   sudo opendkim-genkey -s mail -d notifications.domain.ltd
+  sudo mv mail.private domain.private
+  sudo mv mail.txt domain.txt
   sudo chown opendkim:opendkim -R /etc/opendkim
   ```
 
-* Run playbook for this role: `ansible-playbook playbooks/software.yml
-  --extra-var "target=domain"`
+* Run playbook for this role: `ansible-playbook playbooks/software.yml`
 * Add missing DNS records to your DNS zone:
 
   ```
-  sudo cat /etc/opendkim/keys/mail.txt
+  sudo cat /etc/opendkim/keys/domain.txt
   ```
 
   | Record type |              Key              |            Value            |

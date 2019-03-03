@@ -1,4 +1,4 @@
-- hosts: '{{ target }}'
+- hosts: all
   gather_facts: no
   tasks:
     - name: Copy Postfix Main Config File

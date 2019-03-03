@@ -1,14 +1,2 @@
-[cryptoprocessing]
-web ansible_ssh_host=13.73.140.38 ansible_ssh_user=deployer
-
-[cryptoprocessing:vars]
-key_name=cryptoprocessing
-domain=notifications.cryptoprocessing.io
-
-[pprotocol]
-web ansible_ssh_host=23.97.227.137 ansible_ssh_user=deployer
-
-[pprotocol:vars]
-key_name=pprotocol
-domain=notifications.pprotocol.io
-
+[projects]
+web ansible_ssh_host=51.144.224.173 ansible_ssh_user=deployer
