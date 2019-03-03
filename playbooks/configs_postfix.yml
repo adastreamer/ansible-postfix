@@ -1,8 +1,8 @@
 - hosts: '{{ target }}'
   gather_facts: no
   tasks:
-    - name: Copy Postfix Config Files
-      register: postfix_configs
+    - name: Copy Postfix Main Config File
+      register: postfix_main_config
       become: yes
       template:
         src: '../files/postfix/etc/postfix/main.cf.j2'
@@ -10,8 +10,19 @@
         mode: 0755
         owner: root
 
+
+    - name: Copy mailname File
+      register: mailname_file
+      become: yes
+      template:
+        src: '../files/postfix/etc/mailname.j2'
+        dest:                '/etc/mailname'
+        mode: 0755
+        owner: root
+
+
     - name: Restart Postfix
-      when: postfix_configs.changed
+      when: postfix_main_config.changed or mailname_file.changed
       become: yes
       service:
         name: postfix
